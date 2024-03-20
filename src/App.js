@@ -1,30 +1,37 @@
 import './App.css';
 import { useState, useEffect } from "react";
 
+//custom hook
+import { useFetch } from './hooks/useFetch';
+
+
 const url = "http://localhost:3000/products";
 
 function App() {
 
   const [products, setProducts] = useState([]);
 
+  //custom hook
+  const {data: items} = useFetch(url);
+
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
 
 
   //resgatando dados - da onde? = url base "http://localhost:3000/products"
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch(url);
-        const data = await res.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Erro ao buscar dados:', error);
-      }
-    };
+ // useEffect(() => {
+//  const fetchData = async () => {
+//   try {
+//       const res = await fetch(url);
+//       const data = await res.json();
+//        setProducts(data);
+//    } catch (error) {
+//      console.error('Erro ao buscar dados:', error);
+//    }
+//   };
 
-    fetchData();
-  }, []);
+//   fetchData();
+//}, []);
 
   // add de produtos
   const handleSubmit = async (event) => {
@@ -42,6 +49,15 @@ function App() {
       },
       body: JSON.stringify(product),
     });
+
+    // carregamento dinâmico 
+    const addedProduct = await res.json();
+
+    setProducts((prevProducts) =>[...prevProducts, addedProduct ]);
+
+    setName("");
+    setPrice("");
+
   };
 
   return (
