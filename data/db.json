@@ -69,6 +69,26 @@
       "id": "5878",
       "name": "FONE",
       "price": "120.00"
+    },
+    {
+      "id": "7a77",
+      "name": "FONE",
+      "price": "120.00"
+    },
+    {
+      "id": "7f28",
+      "name": "FONE",
+      "price": "120.00"
+    },
+    {
+      "id": "415b",
+      "name": "FONE",
+      "price": "120.00"
+    },
+    {
+      "id": "c8a2",
+      "name": "TESTE",
+      "price": "1000"
     }
   ]
 }

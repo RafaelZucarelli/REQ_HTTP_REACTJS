@@ -13,7 +13,6 @@ export const useFetch = (url) => {
     const [callFetch, setCallFetch] = useState(false);
 
     //loading 
-
     const [loading, setLoading] = useState(false);
 
     const httpConfig = (data, method) => {

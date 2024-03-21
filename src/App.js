@@ -99,7 +99,8 @@ function App() {
               />
               
             </label >
-           < input type='submit' value="Criar"/>
+           {/* 7 - state de loading no post */}
+          {loading ? <p>Aguarde!</p> : <input type="submit" value="Criar" />}
         </form>
       </div>
     </div>
