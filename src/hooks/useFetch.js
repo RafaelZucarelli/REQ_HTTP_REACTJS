@@ -12,6 +12,10 @@ export const useFetch = (url) => {
     const [method, setMethod] = useState(null);
     const [callFetch, setCallFetch] = useState(false);
 
+    //loading 
+
+    const [loading, setLoading] = useState(false);
+
     const httpConfig = (data, method) => {
         if(method === "POST"){
             setConfig({
@@ -31,11 +35,16 @@ export const useFetch = (url) => {
 
         const fetchData = async () => {
 
-            const res = await fetch(url)
+            //loading
+            setLoading(true);
 
-            const json = await res.json()
+            const res = await fetch(url);
 
-            setData(json)
+            const json = await res.json();
+
+            setData(json);
+
+            setLoading(false);
         }
 
         fetchData();
@@ -60,5 +69,5 @@ export const useFetch = (url) => {
 
         httpConfig();
     }, [config, method, url]);
-    return {data, httpConfig};
+    return {data, httpConfig, loading};
 };
