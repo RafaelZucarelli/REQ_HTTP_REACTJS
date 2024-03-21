@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useFetch } from './hooks/useFetch';
 
 
+
 const url = "http://localhost:3000/products";
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
   const [products, setProducts] = useState([]);
 
   //custom hook
-  const {data: items} = useFetch(url);
+  const {data: items, httpConfig} = useFetch(url);
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -40,8 +41,9 @@ function App() {
     const product = {
       name,
       price,
-    }
-
+    };
+    
+    /*
     const res = await fetch(url, {
       method: "POST",
       headers: {
@@ -53,7 +55,11 @@ function App() {
     // carregamento dinâmico 
     const addedProduct = await res.json();
 
-    setProducts((prevProducts) =>[...prevProducts, addedProduct ]);
+    setProducts((prevProducts) =>[...prevProducts, addedProduct ]); */
+
+    //refatorando POST
+
+    httpConfig(product,"POST")
 
     setName("");
     setPrice("");
@@ -63,7 +69,7 @@ function App() {
   return (
     <div className="App">
       <h1>Lista de Produtos</h1>
-      {products.map((product) => (
+      {items && items.map((product) => (
         <li key={product.id}>{product.name} - {product.price}</li>
       ))}
       <div className='add-product'>
